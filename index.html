@@ -345,3 +345,826 @@ Every tap releases floating symbols ✧
 </div>
 </section>
 </main>
+
+<section id="full-letter-view" class="relative z-10 min-h-screen items-center justify-center px-4 py-20">
+<div class="max-w-4xl w-full editorial-card rounded-3xl p-7 sm:p-12 md:p-16">
+
+<div class="border rounded-2xl p-6 sm:p-10" style="border-color:var(--card-border)">
+<div class="flex flex-wrap justify-between gap-3 pb-6 mb-6 border-b" style="border-color:var(--card-border)">
+<span class="typo-eyebrow" style="color:var(--accent-rose)">Anniversary Keepsake Edition</span>
+<span class="font-serif italic text-sm">With all my heart ♡</span>
+</div>
+
+<div class="space-y-6">
+<h1 class="typo-hero-title" style="color:var(--accent-rose)">Happy anniversary, my love. ♡</h1>
+
+<p class="typo-stanza-body">
+I'm so lucky to have you in my life. Thank you for every little thing, every smile, and every moment we've shared together. You make my days brighter just by being in them. ♡
+</p>
+
+<p class="typo-stanza-body">
+Even though it hasn't been a full year yet, every single day with you means the world to me. I may not be perfect, but I promise to keep choosing you, loving you, and growing with you. No matter what life brings, let's keep holding hands until we reach our real anniversary and continue making beautiful memories together.
+</p>
+
+<p class="typo-closing">
+Here's to us, to more memories, more laughter, and to making it to our first year and many more anniversaries. I love you, always. ♡
+</p>
+</div>
+
+<div class="mt-10 pt-6 border-t flex flex-wrap justify-between gap-4" style="border-color:var(--card-border)">
+<p class="font-serif italic text-3xl" style="color:var(--accent-rose)">Yours forever ♡</p>
+<button id="copy-letter-btn" class="px-4 py-2 rounded-full text-xs border" style="border-color:var(--card-border)">
+<span id="copy-btn-text">Copy Message</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TOP CONTROL BAR -->
+<div class="fixed top-4 right-4 z-40 flex flex-wrap justify-end gap-2">
+<button id="toggle-layout-btn" class="px-3 py-2 rounded-full text-xs editorial-card">
+<span id="layout-mode-label">Card View</span>
+</button>
+<button id="theme-switch-btn" class="px-3 py-2 rounded-full text-xs editorial-card">Theme ✧</button>
+<button id="font-scale-btn" class="px-3 py-2 rounded-full text-xs editorial-card">Aa</button>
+<button id="audio-toggle-btn" class="px-3 py-2 rounded-full text-xs editorial-card">
+<span id="audio-on-icon" class="hidden">♫</span>
+<span id="audio-off-icon">♪</span>
+</button>
+</div>
+
+<!-- DEVICE BADGE -->
+<div id="device-mode-badge" class="fixed bottom-3 right-3 z-30 text-[9px] opacity-50 editorial-card rounded-full px-3 py-1">
+Device
+</div>
+
+<!-- SHARE STUDIO -->
+<div id="share-studio-modal" class="hidden items-center justify-center p-4">
+<div class="max-w-5xl w-full editorial-card rounded-3xl p-5 sm:p-8 my-auto">
+
+<div class="flex justify-between items-center mb-6">
+<div>
+<p class="typo-eyebrow" style="color:var(--accent-rose)">Social Preview Studio</p>
+<h2 class="font-serif text-3xl italic">A little mystery ♡</h2>
+</div>
+<button id="close-share-studio-btn" class="px-4 py-2 rounded-full border text-xs" style="border-color:var(--card-border)">Close ✕</button>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+
+<div>
+<div class="rounded-3xl p-3 border" style="background:#17131b;border-color:var(--card-border)">
+<div class="text-[10px] text-white/50 mb-3">Instagram Link Preview</div>
+<canvas id="og-preview-canvas" width="1200" height="630" class="w-full rounded-xl"></canvas>
+<div class="p-3 text-white">
+<p id="ig-mock-title" class="text-sm">For You ✧</p>
+<p id="ig-mock-desc" class="text-xs opacity-60">Tap to unseal ♡</p>
+</div>
+</div>
+</div>
+
+<div class="space-y-5">
+
+<div>
+<label class="text-xs block mb-2">Mystery Presets</label>
+<div class="grid grid-cols-2 gap-2">
+<button type="button" data-preset="0" class="og-preset-btn border rounded-xl p-3 text-xs">For You ✧</button>
+<button type="button" data-preset="1" class="og-preset-btn border rounded-xl p-3 text-xs">มีอะไรจะบอก...</button>
+<button type="button" data-preset="2" class="og-preset-btn border rounded-xl p-3 text-xs">Open Me ♡</button>
+<button type="button" data-preset="3" class="og-preset-btn border rounded-xl p-3 text-xs">Only For You</button>
+</div>
+</div>
+
+<div>
+<label class="text-xs block mb-2">Card Mood</label>
+<div class="grid grid-cols-3 gap-2">
+<button data-og-theme="midnight" class="og-theme-btn border rounded-xl p-2 text-xs">Midnight</button>
+<button data-og-theme="ivory" class="og-theme-btn border rounded-xl p-2 text-xs">Ivory</button>
+<button data-og-theme="velvet" class="og-theme-btn border rounded-xl p-2 text-xs">Velvet</button>
+</div>
+</div>
+
+<div>
+<label class="text-xs block mb-1">Main Teaser</label>
+<input id="og-input-title" maxlength="32" value="For You." class="w-full rounded-xl p-3 bg-transparent border text-sm">
+</div>
+
+<div>
+<label class="text-xs block mb-1">Sub-hint</label>
+<input id="og-input-sub" maxlength="40" value="Tap to unseal ✧" class="w-full rounded-xl p-3 bg-transparent border text-sm">
+</div>
+
+<div>
+<label class="text-xs block mb-1">Emblem</label>
+<input id="og-input-emblem" maxlength="20" value="♡" class="w-full rounded-xl p-3 bg-transparent border text-sm">
+</div>
+
+<div class="flex flex-wrap gap-2">
+<button id="download-og-btn" class="flex-1 rounded-full p-3 text-xs text-white" style="background:var(--accent-rose)">Save Preview PNG</button>
+<button id="native-share-btn" class="flex-1 rounded-full p-3 text-xs border" style="border-color:var(--card-border)">Share Link ✧</button>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="fixed bottom-4 left-4 z-40">
+<button id="open-share-studio-btn" class="rounded-full px-4 py-3 text-xs text-white shadow-lg" style="background:var(--accent-rose)">
+Share Studio ✧
+</button>
+</div>
+
+<script>
+(() => {
+'use strict';
+
+const $ = id => document.getElementById(id);
+
+let audioCtx = null;
+let soundEnabled = false;
+let loveCount = 0;
+
+const romanceScale = [
+261.63,293.66,329.63,392,440,493.88,523.25,587.33,659.25
+];
+
+function safeOn(id,event,callback) {
+const el = $(id);
+if (el) el.addEventListener(event,callback);
+return el;
+}
+
+/* AUDIO SYSTEM */
+
+function initAudio() {
+if (!audioCtx) {
+const AudioClass = window.AudioContext || window.webkitAudioContext;
+if (AudioClass) audioCtx = new AudioClass();
+}
+if (audioCtx?.state === 'suspended') audioCtx.resume();
+}
+
+function playChime(freq,duration=1.5,volume=.03) {
+if (!soundEnabled || !audioCtx) return;
+
+try {
+const now = audioCtx.currentTime;
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+
+osc.type = 'sine';
+osc.frequency.setValueAtTime(freq,now);
+
+gain.gain.setValueAtTime(.0001,now);
+gain.gain.exponentialRampToValueAtTime(volume,now+.05);
+gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+
+osc.start(now);
+osc.stop(now+duration+.05);
+} catch(error) {
+console.warn('Audio error:',error);
+}
+}
+
+function toggleAudio(forceState) {
+initAudio();
+
+soundEnabled = typeof forceState === 'boolean'
+? forceState
+: !soundEnabled;
+
+const music = $('bg-music');
+const on = $('audio-on-icon');
+const off = $('audio-off-icon');
+
+if (on) on.classList.toggle('hidden',!soundEnabled);
+if (off) off.classList.toggle('hidden',soundEnabled);
+
+if (music) {
+if (soundEnabled) {
+music.volume=.75;
+music.play().catch(() => playChime(523.25,2,.04));
+} else {
+music.pause();
+}
+}
+}
+
+/* FLOATING SYMBOLS */
+
+function spawnFloatingHeart(x,y,symbol) {
+const symbols=['♡','✧','★','·˖°','◇','✦'];
+
+const el=document.createElement('div');
+el.textContent=symbol || symbols[Math.floor(Math.random()*symbols.length)];
+
+Object.assign(el.style,{
+position:'fixed',
+left:x+'px',
+top:y+'px',
+zIndex:9999,
+pointerEvents:'none',
+color:'var(--accent-rose)',
+background:'var(--card-surface)',
+border:'1px solid var(--card-border)',
+borderRadius:'30px',
+padding:'5px 12px',
+fontSize:'18px',
+transform:'translate(-50%,-50%) scale(.8)',
+transition:'all 1.7s ease',
+boxShadow:'0 8px 20px var(--glow-color)'
+});
+
+document.body.appendChild(el);
+
+const dx=(Math.random()-.5)*130;
+const dy=-75-Math.random()*85;
+
+requestAnimationFrame(() => {
+el.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px)) scale(1.2)`;
+el.style.opacity='0';
+});
+
+setTimeout(()=>el.remove(),1800);
+}
+
+/* KINETIC TYPOGRAPHY */
+
+function prepareKineticTypography() {
+document.querySelectorAll('[data-kinetic="true"]').forEach(el => {
+if (el.dataset.prepared) return;
+el.dataset.prepared='true';
+
+let index=0;
+
+function process(node) {
+if (node.nodeType===Node.TEXT_NODE) {
+const fragment=document.createDocumentFragment();
+const parts=node.textContent.split(/(\s+)/);
+
+parts.forEach(part => {
+if (!part.trim()) {
+fragment.appendChild(document.createTextNode(part));
+} else {
+const span=document.createElement('span');
+span.className='kinetic-word';
+span.textContent=part;
+span.style.transitionDelay=Math.min(index*35,1000)+'ms';
+index++;
+fragment.appendChild(span);
+}
+});
+return fragment;
+}
+
+if (node.nodeType===Node.ELEMENT_NODE) {
+const clone=node.cloneNode(false);
+clone.classList.add('kinetic-word');
+clone.style.transitionDelay=Math.min(index*35,1000)+'ms';
+index++;
+
+Array.from(node.childNodes).forEach(child => {
+clone.appendChild(process(child));
+});
+return clone;
+}
+return node.cloneNode(true);
+}
+
+const children=Array.from(el.childNodes);
+el.replaceChildren(...children.map(process));
+});
+}
+
+/* SCROLL OBSERVER */
+
+function initScrollObserver() {
+const sections=document.querySelectorAll('.reveal-section');
+
+if (!('IntersectionObserver' in window)) {
+sections.forEach(el=>el.classList.add('is-visible'));
+return;
+}
+
+const observer=new IntersectionObserver(entries => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('is-visible');
+observer.unobserve(entry.target);
+}
+});
+},{threshold:.12});
+
+sections.forEach(section=>observer.observe(section));
+}
+
+/* AMBIENT CANVAS */
+
+function initAmbientCanvas() {
+const canvas=$('ambient-canvas');
+if (!canvas) return;
+
+const ctx=canvas.getContext('2d');
+if (!ctx) return;
+
+let width=0;
+let height=0;
+
+function resize() {
+const dpr=Math.min(window.devicePixelRatio||1,2);
+width=window.innerWidth;
+height=window.innerHeight;
+canvas.width=width*dpr;
+canvas.height=height*dpr;
+ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+
+resize();
+window.addEventListener('resize',resize);
+
+const count=window.innerWidth<640?22:38;
+
+const particles=Array.from({length:count},()=>({
+x:Math.random()*width,
+y:Math.random()*height,
+radius:1+Math.random()*2.5,
+speedY:-.15-Math.random()*.35,
+speedX:(Math.random()-.5)*.3,
+alpha:.12+Math.random()*.3,
+rose:Math.random()>.5
+}));
+
+function render() {
+ctx.clearRect(0,0,width,height);
+
+particles.forEach(p=>{
+p.x+=p.speedX;
+p.y+=p.speedY;
+
+if(p.y<-10)p.y=height+10;
+if(p.x<-10)p.x=width+10;
+if(p.x>width+10)p.x=-10;
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.radius,0,Math.PI*2);
+ctx.fillStyle=p.rose
+?`rgba(184,74,90,${p.alpha})`
+:`rgba(212,175,55,${p.alpha})`;
+ctx.fill();
+});
+
+requestAnimationFrame(render);
+}
+
+render();
+}
+
+/* DEVICE BADGE */
+
+function updateDeviceBadge() {
+const badge=$('device-mode-badge');
+if(!badge)return;
+
+const landscape=innerWidth>innerHeight;
+let type='Desktop';
+
+if(innerWidth<640 || (innerWidth<920 && landscape && innerHeight<540)) {
+type='Mobile';
+} else if(innerWidth<=1180) {
+type='Tablet';
+}
+
+badge.textContent=`${type} • ${landscape?'Landscape':'Portrait'}`;
+}
+
+/* SCROLL PROGRESS */
+
+function initScrollProgress() {
+const progress=$('scroll-progress');
+if(!progress)return;
+
+function update() {
+const max=document.documentElement.scrollHeight-innerHeight;
+const pct=max>0?Math.min(scrollY/max*100,100):0;
+progress.style.width=pct+'%';
+}
+
+window.addEventListener('scroll',update,{passive:true});
+update();
+}
+
+/* OPEN ENVELOPE */
+
+safeOn('open-seal-btn','click',e=>{
+const rect=e.currentTarget.getBoundingClientRect();
+const x=rect.left+rect.width/2;
+const y=rect.top+rect.height/2;
+
+for(let i=0;i<12;i++) {
+setTimeout(()=>spawnFloatingHeart(x,y),i*55);
+}
+
+toggleAudio(true);
+
+$('envelope-overlay')?.classList.add('opened');
+
+document.querySelector('.reveal-section')
+?.classList.add('is-visible');
+});
+
+/* HIGHLIGHT SPARKLES */
+
+document.querySelectorAll('.highlight-phrase').forEach(phrase=>{
+phrase.addEventListener('click',e=>{
+const symbol=phrase.dataset.spark||'♡';
+
+for(let i=0;i<4;i++) {
+setTimeout(()=>{
+spawnFloatingHeart(
+e.clientX+(Math.random()-.5)*40,
+e.clientY+(Math.random()-.5)*20,
+symbol
+);
+},i*70);
+}
+
+playChime(romanceScale[Math.floor(Math.random()*romanceScale.length)]);
+});
+});
+
+/* LOVE BUTTON */
+
+safeOn('love-pulse-btn','click',e=>{
+loveCount++;
+
+const badge=$('love-counter-badge');
+if(badge)badge.textContent=loveCount+' ♡';
+
+e.currentTarget.classList.add('heartbeat-active');
+
+setTimeout(()=>{
+e.currentTarget.classList.remove('heartbeat-active');
+},950);
+
+const rect=e.currentTarget.getBoundingClientRect();
+
+for(let i=0;i<6;i++) {
+setTimeout(()=>{
+spawnFloatingHeart(
+rect.left+rect.width/2+(Math.random()-.5)*140,
+rect.top,
+'♡'
+);
+},i*85);
+}
+
+playChime(523.25,2,.04);
+setTimeout(()=>playChime(659.25,2,.04),120);
+});
+
+/* LAYOUT SWITCH */
+
+let isCardView=false;
+
+safeOn('toggle-layout-btn','click',()=>{
+isCardView=!isCardView;
+
+const story=$('cinematic-scroll-view');
+const card=$('full-letter-view');
+const label=$('layout-mode-label');
+
+if(isCardView) {
+if(story)story.classList.add('hidden');
+if(card) {
+card.classList.remove('hidden');
+card.classList.add('flex');
+}
+if(label)label.textContent='Story Scroll';
+} else {
+if(card) {
+card.classList.add('hidden');
+card.classList.remove('flex');
+}
+if(story)story.classList.remove('hidden');
+if(label)label.textContent='Card View';
+}
+
+window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* FONT SIZE */
+
+const scales=[1,1.12,.92];
+let scaleIndex=0;
+
+safeOn('font-scale-btn','click',()=>{
+scaleIndex=(scaleIndex+1)%scales.length;
+document.documentElement.style.setProperty('--font-scale',scales[scaleIndex]);
+document.body.style.fontSize=(16*scales[scaleIndex])+'px';
+playChime(440);
+});
+
+/* THEME */
+
+const themes=['midnight','ivory','velvet'];
+let themeIndex=0;
+
+safeOn('theme-switch-btn','click',()=>{
+themeIndex=(themeIndex+1)%themes.length;
+
+const theme=themes[themeIndex];
+
+if(theme==='midnight') {
+document.documentElement.removeAttribute('data-theme');
+} else {
+document.documentElement.setAttribute('data-theme',theme);
+}
+
+playChime(587.33);
+});
+
+/* AUDIO BUTTON */
+
+safeOn('audio-toggle-btn','click',()=>toggleAudio());
+
+/* COPY LETTER */
+
+const rawMessage=`Happy anniversary, my love. ♡
+
+I'm so lucky to have you in my life. Thank you for every little thing, every smile, and every moment we've shared together. You make my days brighter just by being in them. ♡
+
+Even though it hasn't been a full year yet, every single day with you means the world to me. I may not be perfect, but I promise to keep choosing you, loving you, and growing with you. No matter what life brings, let's keep holding hands until we reach our real anniversary and continue making beautiful memories together. ♡
+
+Here's to us, to more memories, more laughter, and to making it to our first year and many more anniversaries. I love you, always. ♡`;
+
+safeOn('copy-letter-btn','click',async()=>{
+const label=$('copy-btn-text');
+
+try {
+if(navigator.clipboard && window.isSecureContext) {
+await navigator.clipboard.writeText(rawMessage);
+} else {
+const textarea=document.createElement('textarea');
+textarea.value=rawMessage;
+textarea.style.position='fixed';
+textarea.style.opacity='0';
+document.body.appendChild(textarea);
+textarea.select();
+document.execCommand('copy');
+textarea.remove();
+}
+
+if(label) {
+label.textContent='Copied ♡';
+setTimeout(()=>label.textContent='Copy Message',2200);
+}
+} catch(error) {
+if(label)label.textContent='Copy failed';
+}
+});
+
+/* SHARE PREVIEW STUDIO */
+
+const modal=$('share-studio-modal');
+const canvas=$('og-preview-canvas');
+const ctx=canvas?.getContext('2d');
+
+const titleInput=$('og-input-title');
+const subInput=$('og-input-sub');
+const emblemInput=$('og-input-emblem');
+
+const igTitle=$('ig-mock-title');
+const igDesc=$('ig-mock-desc');
+
+const presets=[
+{top:'A PRIVATE KEEPSAKE',title:'For You.',sub:'Tap to unseal ✧',emblem:'♡',theme:'midnight'},
+{top:'SECRET NOTE • 01',title:'มีอะไรจะบอก...',sub:'เปิดดูตอนอยู่คนเดียว ♡',emblem:'✧',theme:'ivory'},
+{top:'CONFIDENTIAL LETTER',title:'Open Me.',sub:'A quiet moment awaits inside ✧',emblem:'♡',theme:'velvet'},
+{top:'FOR MY FAVORITE PERSON',title:'Only For You',sub:'กดเพื่อเปิดซองจดหมาย ✧',emblem:'♡',theme:'midnight'}
+];
+
+const palettes={
+midnight:{
+outer:'#110C15',inner:'#211728',border:'#8e744d',
+accent:'#E2B86B',rose:'#E57383',main:'#FAF3EB',sub:'#C6B3AC'
+},
+ivory:{
+outer:'#F4ECE1',inner:'#FFFDF9',border:'#d7aaa8',
+accent:'#B84A5A',rose:'#B84A5A',main:'#241C19',sub:'#6E5A53'
+},
+velvet:{
+outer:'#260B12',inner:'#471521',border:'#c9a66a',
+accent:'#E5C178',rose:'#F29CA8',main:'#FFF5F6',sub:'#E2BFC5'
+}
+};
+
+let ogState={...presets[0]};
+
+function renderOgPreviewCanvas() {
+if(!canvas||!ctx)return;
+
+const w=canvas.width;
+const h=canvas.height;
+const pal=palettes[ogState.theme]||palettes.midnight;
+
+const grad=ctx.createRadialGradient(w*.5,h*.45,40,w*.5,h*.5,w*.65);
+grad.addColorStop(0,pal.inner);
+grad.addColorStop(1,pal.outer);
+
+ctx.fillStyle=grad;
+ctx.fillRect(0,0,w,h);
+
+ctx.strokeStyle=pal.border;
+ctx.lineWidth=1.5;
+ctx.strokeRect(48,48,w-96,h-96);
+
+ctx.lineWidth=.8;
+ctx.strokeRect(62,62,w-124,h-124);
+
+const points=[
+[180,140,3.5],[1020,160,4],[240,490,3],
+[960,470,4.5],[600,105,2.5],[420,210,2]
+];
+
+points.forEach(([x,y,r],i)=>{
+ctx.beginPath();
+ctx.arc(x,y,r,0,Math.PI*2);
+ctx.fillStyle=i%2?pal.rose:pal.accent;
+ctx.globalAlpha=.4;
+ctx.fill();
+});
+ctx.globalAlpha=1;
+
+ctx.fillStyle=pal.sub;
+ctx.font='500 16px sans-serif';
+ctx.textAlign='center';
+ctx.fillText(ogState.top.toUpperCase(),w/2,138);
+
+ctx.beginPath();
+ctx.roundRect((w-210)/2,182,210,54,27);
+ctx.fillStyle=pal.rose;
+ctx.globalAlpha=.16;
+ctx.fill();
+ctx.globalAlpha=1;
+ctx.strokeStyle=pal.accent;
+ctx.stroke();
+
+ctx.fillStyle=pal.rose;
+ctx.font='30px serif';
+ctx.fillText(ogState.emblem,w/2,220);
+
+ctx.fillStyle=pal.main;
+ctx.font='italic 600 104px Georgia,serif';
+
+let mainTitle=ogState.title||'For You.';
+if(ctx.measureText(mainTitle).width>w-160) {
+ctx.font='italic 600 70px Georgia,serif';
+}
+ctx.fillText(mainTitle,w/2,370);
+
+ctx.strokeStyle=pal.accent;
+ctx.beginPath();
+ctx.moveTo(w/2-110,432);
+ctx.lineTo(w/2+110,432);
+ctx.stroke();
+
+ctx.fillStyle=pal.accent;
+ctx.font='24px sans-serif';
+ctx.fillText(ogState.sub||'Tap to unseal ✧',w/2,488);
+
+if(igTitle)igTitle.textContent=ogState.title+' ✧';
+if(igDesc)igDesc.textContent=ogState.sub+' '+ogState.emblem;
+}
+
+function openShareStudio() {
+if(!modal)return;
+modal.classList.remove('hidden');
+modal.classList.add('flex');
+renderOgPreviewCanvas();
+}
+
+function closeShareStudio() {
+if(!modal)return;
+modal.classList.add('hidden');
+modal.classList.remove('flex');
+}
+
+safeOn('open-share-studio-btn','click',openShareStudio);
+safeOn('close-share-studio-btn','click',closeShareStudio);
+
+modal?.addEventListener('click',e=>{
+if(e.target===modal)closeShareStudio();
+});
+
+document.querySelectorAll('.og-preset-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+const index=Number(btn.dataset.preset);
+if(!presets[index])return;
+
+ogState={...presets[index]};
+
+if(titleInput)titleInput.value=ogState.title;
+if(subInput)subInput.value=ogState.sub;
+if(emblemInput)emblemInput.value=ogState.emblem;
+
+renderOgPreviewCanvas();
+playChime(523.25);
+});
+});
+
+document.querySelectorAll('.og-theme-btn').forEach(btn=>{
+btn.addEventListener('click',()=>{
+const theme=btn.dataset.ogTheme;
+if(!palettes[theme])return;
+
+ogState.theme=theme;
+renderOgPreviewCanvas();
+playChime(587.33);
+});
+});
+
+[titleInput,subInput,emblemInput].forEach(input=>{
+input?.addEventListener('input',()=>{
+ogState.title=titleInput?.value||'';
+ogState.sub=subInput?.value||'';
+ogState.emblem=emblemInput?.value||'';
+renderOgPreviewCanvas();
+});
+});
+
+/* DOWNLOAD PREVIEW */
+
+safeOn('download-og-btn','click',()=>{
+if(!canvas)return;
+
+renderOgPreviewCanvas();
+
+const link=document.createElement('a');
+link.download='og-preview.png';
+link.href=canvas.toDataURL('image/png');
+link.click();
+
+playChime(659.25);
+});
+
+/* NATIVE SHARE */
+
+safeOn('native-share-btn','click',async e=>{
+const button=e.currentTarget;
+
+const shareData={
+title:ogState.title,
+text:ogState.sub+' '+ogState.emblem,
+url:window.location.href
+};
+
+if(navigator.share) {
+try {
+await navigator.share(shareData);
+} catch(error) {
+if(error.name!=='AbortError')console.warn(error);
+}
+} else {
+try {
+await navigator.clipboard.writeText(window.location.href);
+button.textContent='Copied Link ♡';
+setTimeout(()=>button.textContent='Share Link ✧',2000);
+} catch(error) {
+console.warn('Copy failed',error);
+}
+}
+});
+
+/* INITIALIZATION */
+
+function initialize() {
+prepareKineticTypography();
+initScrollObserver();
+initAmbientCanvas();
+initScrollProgress();
+updateDeviceBadge();
+renderOgPreviewCanvas();
+
+if(document.fonts?.ready) {
+document.fonts.ready.then(renderOgPreviewCanvas);
+}
+
+window.addEventListener('resize',updateDeviceBadge);
+}
+
+if(document.readyState==='loading') {
+document.addEventListener('DOMContentLoaded',initialize);
+} else {
+initialize();
+}
+
+})();
+</script>
+
+</body>
+</html>
