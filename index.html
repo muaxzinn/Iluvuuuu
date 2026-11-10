@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#151018">
+<title>For My Favorite Person ♡</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-primary:#151018;
+  --bg-secondary:#241a27;
+  --card-surface:rgba(39,29,43,.88);
+  --card-border:rgba(226,184,107,.2);
+  --text-primary:#fff7f1;
+  --text-secondary:#c6b3ac;
+  --accent-rose:#e57383;
+  --accent-gold:#d4af37;
+  --glow-color:rgba(229,115,131,.2);
+  --font-scale:1;
+}
+:root[data-theme="ivory"] {
+  --bg-primary:#f5eee6;
+  --bg-secondary:#fffaf4;
+  --card-surface:rgba(255,253,249,.94);
+  --card-border:rgba(184,74,90,.2);
+  --text-primary:#302522;
+  --text-secondary:#78645c;
+  --accent-rose:#b84a5a;
+  --accent-gold:#b88b43;
+  --glow-color:rgba(184,74,90,.15);
+}
+:root[data-theme="velvet"] {
+  --bg-primary:#260b12;
+  --bg-secondary:#471521;
+  --card-surface:rgba(71,21,33,.94);
+  --card-border:rgba(226,184,107,.25);
+  --text-primary:#fff5f6;
+  --text-secondary:#e2bfc5;
+  --accent-rose:#f29ca8;
+  --accent-gold:#e5c178;
+  --glow-color:rgba(242,156,168,.2);
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  font-family:'Plus Jakarta Sans',sans-serif;
+  overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+.font-serif {font-family:'Cormorant Garamond',serif}
+.editorial-card {
+  background:var(--card-surface);
+  border:1px solid var(--card-border);
+  box-shadow:0 20px 70px rgba(0,0,0,.12);
+  backdrop-filter:blur(18px);
+}
+.typo-eyebrow {
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.typo-hero-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.8rem,8vw,6rem);
+  line-height:1.05;
+}
+.typo-stanza-lead {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.6rem,3.5vw,2.3rem);
+  line-height:1.5;
+}
+.typo-stanza-body {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.25rem,2.5vw,1.7rem);
+  line-height:1.7;
+}
+.typo-closing {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.8rem,4vw,3rem);
+  line-height:1.5;
+}
+.highlight-phrase {
+  color:var(--accent-rose);
+  cursor:pointer;
+  border-bottom:1px solid var(--accent-rose);
+  transition:opacity .2s;
+}
+.highlight-phrase:hover {opacity:.65}
+.reveal-section {
+  opacity:0;
+  transform:translateY(35px);
+  transition:opacity 1s ease,transform 1s ease;
+}
+.reveal-section.is-visible {
+  opacity:1;
+  transform:translateY(0);
+}
+.kinetic-word {
+  display:inline-block;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.is-visible .kinetic-word {opacity:1;transform:translateY(0)}
+#envelope-overlay {
+  transition:opacity .9s ease,visibility .9s ease;
+}
+#envelope-overlay.opened {
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.wax-seal-btn {box-shadow:0 10px 30px rgba(158,51,66,.4),inset 0 2px 5px rgba(255,255,255,.2)}
+.wax-seal-btn:hover {transform:scale(1.06)}
+.animate-float-slow {animation:float 4s ease-in-out infinite}
+@keyframes float {50%{transform:translateY(-10px)}}
+@keyframes pulse {
+  50%{transform:scale(1.13)}
+}
+.heartbeat-active {animation:pulse .45s ease 2}
+#ambient-canvas {
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
+}
+#scroll-progress {
+  position:fixed;
+  top:0;
+  left:0;
+  height:3px;
+  width:0;
+  background:var(--accent-rose);
+  z-index:100;
+}
+#full-letter-view {display:none}
+#full-letter-view.flex {display:flex}
+.landscape-compact-section {scroll-margin-top:20px}
+button { -webkit-tap-highlight-color:transparent }
+button:focus-visible {
+  outline:2px solid var(--accent-gold);
+  outline-offset:4px;
+}
+#share-studio-modal {
+  position:fixed;
+  inset:0;
+  z-index:70;
+  overflow-y:auto;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
+}
+@media (orientation:landscape) and (max-height:600px) {
+  .landscape-compact-section {min-height:auto;padding-top:55px;padding-bottom:55px}
+  .landscape-split-grid {display:grid;grid-template-columns:1fr 1.5fr;gap:35px;align-items:center}
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    transition-duration:.01ms!important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="scroll-progress"></div>
+<canvas id="ambient-canvas"></canvas>
+
+<audio id="bg-music" loop preload="none" src="music.mp3"></audio>
+
+<div id="envelope-overlay" class="fixed inset-0 z-50 flex items-center justify-center p-4"
+style="background:radial-gradient(circle at 50% 35%,var(--bg-secondary),var(--bg-primary) 80%)">
+
+<div class="max-w-lg w-full editorial-card rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden">
+
+<div class="absolute top-3 left-3 w-8 h-8 border-t border-l opacity-40" style="border-color:var(--accent-gold)"></div>
+<div class="absolute top-3 right-3 w-8 h-8 border-t border-r opacity-40" style="border-color:var(--accent-gold)"></div>
+<div class="absolute bottom-3 left-3 w-8 h-8 border-b border-l opacity-40" style="border-color:var(--accent-gold)"></div>
+<div class="absolute bottom-3 right-3 w-8 h-8 border-b border-r opacity-40" style="border-color:var(--accent-gold)"></div>
+
+<p class="typo-eyebrow mb-2" style="color:var(--text-secondary)">A Personal Keepsake</p>
+
+<h1 class="font-serif italic text-4xl sm:text-5xl mb-3">
+For My Favorite Person
+</h1>
+
+<p class="text-sm mb-7" style="color:var(--accent-rose)">♡</p>
+
+<p class="text-xs sm:text-sm max-w-xs mx-auto mb-7 leading-relaxed" style="color:var(--text-secondary)">
+Tap the wax seal below to unfold your letter with our song and kinetic typography.
+</p>
+
+<button id="open-seal-btn" aria-label="Open Anniversary Letter"
+class="wax-seal-btn group relative w-28 h-28 rounded-full flex flex-col items-center justify-center mx-auto"
+style="background:radial-gradient(circle at 32% 30%,#D45B6A,#9E3342 62%,#6E1C28);border:2px solid rgba(212,175,55,.55)">
+
+<div class="w-24 h-24 rounded-full border border-amber-200/35 flex flex-col items-center justify-center">
+<span class="text-amber-100 text-xl">♡</span>
+<span class="text-[10px] tracking-widest uppercase text-amber-100 mt-1">Open</span>
+</div>
+</button>
+
+<p class="text-[10px] uppercase tracking-widest mt-8 opacity-60" style="color:var(--text-secondary)">
+Designed for Portrait & Landscape
+</p>
+</div>
+</div>
+
+<main id="cinematic-scroll-view" class="relative z-10 w-full">
+
+<section class="reveal-section landscape-compact-section min-h-screen flex flex-col justify-center items-center px-5 py-20">
+<div class="max-w-4xl w-full mx-auto text-center landscape-split-grid">
+
+<div class="flex flex-col items-center">
+<div class="animate-float-slow inline-flex items-center justify-center px-5 py-3 rounded-full mb-5 editorial-card">
+<span class="text-xl" style="color:var(--accent-rose)">♡</span>
+</div>
+<p class="typo-eyebrow mb-3" style="color:var(--accent-rose)">Chapter I • Our Journey Together</p>
+</div>
+
+<div>
+<h1 class="typo-hero-title font-medium mb-6" data-kinetic="true">
+Happy anniversary, my love. ♡
+</h1>
+<p class="text-xs tracking-widest uppercase opacity-65 mt-4" style="color:var(--text-secondary)">
+Tap any highlighted phrase to bloom sparkles • Scroll gently ✧
+</p>
+</div>
+</div>
+
+<a href="#chapter-gratitude" class="absolute bottom-7 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-65">
+<span class="text-[10px] uppercase tracking-widest">Scroll</span>
+<span class="w-5 h-8 rounded-full border flex items-start justify-center p-1">
+<span class="w-1 h-2 rounded-full animate-bounce" style="background:var(--accent-rose)"></span>
+</span>
+</a>
+</section>
+
+<section id="chapter-gratitude" class="reveal-section min-h-screen flex items-center justify-center px-4 py-14">
+<div class="max-w-4xl w-full editorial-card rounded-3xl p-7 sm:p-12 md:p-16 relative overflow-hidden">
+
+<span class="font-serif italic text-9xl absolute -top-4 right-5 opacity-5">01</span>
+
+<div class="landscape-split-grid">
+<div class="mb-5 border-b pb-4 md:border-b-0 md:border-r md:pr-6" style="border-color:var(--card-border)">
+<p class="typo-eyebrow mb-2" style="color:var(--accent-rose)">Chapter II • Gratitude</p>
+<h2 class="font-serif italic text-3xl">Every Smile & Shared Moment</h2>
+<p class="text-xs mt-2 opacity-70" style="color:var(--text-secondary)">
+The quiet magic of having you by my side ♡
+</p>
+</div>
+
+<div class="space-y-4">
+<p class="typo-stanza-lead" data-kinetic="true">
+I'm so lucky to have you in my life. Thank you for
+<span class="highlight-phrase" data-spark="♡">every little thing</span>,
+<span class="highlight-phrase" data-spark="✧">every smile</span>, and
+<span class="highlight-phrase" data-spark="★">every moment</span>
+we've shared together.
+</p>
+<p class="typo-stanza-body pt-2" data-kinetic="true">
+You make my days <span class="highlight-phrase" data-spark="✧">brighter</span> just by being in them. ♡
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="chapter-promise" class="reveal-section min-h-screen flex items-center justify-center px-4 py-14">
+<div class="max-w-4xl w-full editorial-card rounded-3xl p-7 sm:p-12 md:p-16 relative overflow-hidden">
+
+<span class="font-serif italic text-9xl absolute -top-4 right-5 opacity-5">02</span>
+
+<div class="landscape-split-grid">
+<div class="mb-5 border-b pb-4 md:border-b-0 md:border-r md:pr-6" style="border-color:var(--card-border)">
+<p class="typo-eyebrow mb-2" style="color:var(--accent-rose)">Chapter III • Our Milestone</p>
+<h2 class="font-serif italic text-3xl">Counting Every Day With You</h2>
+<p class="text-xs mt-2 opacity-70" style="color:var(--text-secondary)">
+Walking hand in hand toward our first full year and beyond ♡
+</p>
+</div>
+
+<div class="space-y-4">
+<p class="typo-stanza-lead" data-kinetic="true">
+Even though it hasn't been a full year yet, every single day with you means the world to me. I may not be perfect, but I promise to
+<span class="highlight-phrase" data-spark="♡">keep choosing you</span>,
+<span class="highlight-phrase" data-spark="✧">loving you</span>, and
+<span class="highlight-phrase" data-spark="★">growing with you</span>.
+</p>
+<p class="typo-stanza-body pt-2" data-kinetic="true">
+No matter what life brings, let's keep holding hands until we
+<span class="highlight-phrase" data-spark="✧">reach our real anniversary</span>
+and continue making
+<span class="highlight-phrase" data-spark="♡">beautiful memories</span> together.
+</p>
+</div>
+</div>
+</div>
+</section>
+
+<section id="chapter-forever" class="reveal-section min-h-screen flex items-center justify-center px-4 py-16">
+<div class="max-w-4xl w-full editorial-card rounded-3xl p-8 sm:p-14 md:p-20 text-center">
+
+<div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border mb-6" style="border-color:var(--card-border)">
+<span style="color:var(--accent-gold)">✧</span>
+<span class="typo-eyebrow" style="color:var(--accent-rose)">Forever & Always</span>
+<span style="color:var(--accent-gold)">✧</span>
+</div>
+
+<p class="typo-closing max-w-3xl mx-auto mb-6" data-kinetic="true">
+Here's to us, to <span class="highlight-phrase" data-spark="♡">more memories</span>,
+<span class="highlight-phrase" data-spark="✧">more laughter</span>, and to
+<span class="highlight-phrase" data-spark="★">making it to our first year and many more anniversaries</span>.
+</p>
+
+<p class="typo-hero-title font-semibold italic mt-4 mb-8" style="color:var(--accent-rose)">
+I love you, always. ♡
+</p>
+
+<div class="mt-8 pt-8 border-t flex flex-col items-center" style="border-color:var(--card-border)">
+<button id="love-pulse-btn" class="px-7 py-4 rounded-full text-white shadow-lg active:scale-95" style="background:linear-gradient(135deg,var(--accent-rose),#8F2A3A)">
+♡ <span>Tap to Send Love</span>
+<span id="love-counter-badge" class="ml-2 px-2 rounded-full bg-white/20">∞ ♡</span>
+</button>
+<p class="text-xs mt-3 opacity-65" style="color:var(--text-secondary)">
+Every tap releases floating symbols ✧
+</p>
+</div>
+</div>
+</section>
+</main>
